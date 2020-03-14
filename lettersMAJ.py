@@ -360,6 +360,6 @@ for v in var:
 tu.speed(10)
 
 
-defil([A,S,X],400,interval=60)
+defil([A,S,S,S,X],400,interval=60)
 tu.ht()
 tu.screen.mainloop()
