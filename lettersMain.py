@@ -1,4 +1,5 @@
 import lettersFuncs as let
+import time
 
 tu = let.tu
 
@@ -56,18 +57,19 @@ def defil(letters,screensize,start=None,diameter=100,interval=None,delay=10):
 
 
 def write(text, size, start=(0,0)):
-    step = size / 2
+    step = size / 2 / 2 * 3
     posX = start[0]
     posY = start[1]
-    for letter in text.upper():
-        if letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+    for letter in text:
+        if letter in "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz":
             exec(f"let.{letter}({posX}, {posY}, {size})")
-            posX += step
         elif letter == " ":
             posX += step / 4
         elif letter == "\n":
-            posY -= size + size / 4
+            posY -= size + size / 2
             posX = start[0] - step
+        else :
+            let.unknown(posX, posY, size)
         posX += step
 
 
@@ -87,8 +89,9 @@ L(0, 0, 100)"""
 
 tu.speed(7)
 
-textToWrite = """iiiiiiiiiiiiiiiiiiiiiillllllllllllllllllllll"""
-write(textToWrite, 30, (-350, 0))
+textToWrite = """Bonjour je m appelle Liam et mon
+frere se nomme Yanis"""
+write(textToWrite, 50, (-500, 0))
 #defil([A,S,S,S,X],400,interval=60)
 tu.ht()
 tu.screen.mainloop()
