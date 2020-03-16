@@ -7,7 +7,7 @@ import turtle as t
 
 tu = t.Turtle(visible=True)
 tu.shape('turtle')
-tu.speed(3)
+tu.speed(0)
 """
 x,y
 
@@ -18,14 +18,14 @@ x2,y2
 """
 
 
-def talloval(r):
+def talloval(r):    # Vertical Oval
     tu.left(45)
     for _ in range(2):
         tu.circle(r,90)
-        tu.circle(r / 2,90)
+        tu.circle(r / 5,90)
 
 
-def flatoval(r):  # Horizontal Oval
+def flatoval(r):     # Horizontal Oval
     tu.right(45)
     for _ in range(2):
         tu.circle(r,90)
@@ -63,13 +63,13 @@ def B(x,y,d):
     tu.circle(d * frac2 / 2,180)
     tu.fd(d / 2 * frac1)
     tu.seth(0)
-    tu.fd(d / 2 * frac2)
+    tu.fd(d / 2 * frac1)
     tu.circle(d * frac1 / 2,180)
-    tu.fd(d / 2 * frac2)
+    tu.fd(d / 2 * frac1)
 
 
 def C(x,y,d):
-    move(x,y)
+    move(x + d / 2,y)
     tu.seth(180)
     tu.circle(d / 2,180)
 
@@ -107,9 +107,9 @@ def E(x,y,d):
 
 
 def G(x,y,d):
-    move(x,y)
+    move(x + d / 2,y)
     tu.seth(180)
-    tu.circle(d / 2,200)
+    tu.circle(d / 2,180)
     tu.seth(90)
     tu.fd(d / 2)
     tu.seth(180)
@@ -121,7 +121,7 @@ def H(x,y,d):
     tu.fd(d)
     tu.bk(d / 2)
     tu.seth(0)
-    tu.fd(d / 3 * 2)
+    tu.fd(d / 2)
     tu.seth(90)
     tu.fd(d / 2)
     tu.bk(d)
@@ -130,25 +130,21 @@ def H(x,y,d):
 barfrac = 5 / 12
 def I(x,y,d):
     move(x,y)
-    tu.fd(d * barfrac / 2)
-    tu.bk(d * barfrac)
-    tu.fd(d * barfrac / 2)
+    tu.fd(d / 2)
+    tu.bk(d / 4)
     tu.seth(270)
     tu.fd(d)
     tu.seth(0)
-    tu.bk(d * barfrac / 2)
-    tu.fd(d * barfrac)
+    tu.bk(d / 4)
+    tu.fd(d / 2)
 
 
 def J(x,y,d):
     move(x,y)
-    tu.bk(d * barfrac / 2)
-    tu.fd(d * barfrac)
-    tu.bk(d * barfrac / 2)
-    move(x,y)
+    tu.fd(d / 2)
     tu.seth(270)
-    tu.fd(d / 6 * 5)
-    tu.circle(-d / 6,180)
+    tu.fd(d / 4 * 3)
+    tu.circle(-d / 4,180)
 
 
 def K(x,y,d):
@@ -173,6 +169,7 @@ def L(x,y,d):
 
 def M(x,y,d):
     ang = -45
+    ang = ang + ang / 2
     seg = 2 / 3
     midang = ang * 2
 
@@ -190,41 +187,47 @@ def M(x,y,d):
 
 
 def N(x,y,d):
-    ang = 7 / 12
-    move(x,y)
-    tu.seth(270)
-    tu.fd(d)
-    move(x,y)
-    tu.goto(x + d * ang,y - d)
+    move(x, y-d)
     tu.seth(90)
     tu.fd(d)
+    tu.goto(x + d / 2, y - d)
+    tu.fd(d)
 
-def O(x,y,d):
-    move(x,y)
+"""def O(x,y,d):
+    move(x + d / 5,y)
     tu.seth(180)
     talloval(d / 3 * 2)
+"""
+def O(x,y,d):
+    move(x, y - d / 4)
+    tu.seth(270)
+    tu.fd(d / 2)
+    tu.circle(d / 4, 180)
+    tu.fd(d / 2)
+    tu.circle(d / 4, 180)
 
 
 def P(x,y,d):
     move(x,y)
-    D(x,y,d / 2)
+    tu.fd(d / 4)
+    tu.circle(-d / 4, 180)
+    tu.fd(d / 4)
+    move(x, y)
     tu.seth(270)
     tu.fd(d)
 
 
 def Q(x,y,d):
-    ang = 45
     move(x,y)
-    tu.circle(-d / 2)
-    move(x + d / 10,y - d / 2 - d / 10)
-    tu.right(ang)
-    tu.fd(d / 3 * 2)
+    O(x, y, d)
+    move(x + d / 4, y - d / 3 * 2)
+    tu.goto(x + d / 2, y - d)
 
 
 def R(x,y,d):
     P(x,y,d)
     move(x,y - d / 2)
-    tu.goto(x + d / 3,y - d)
+    tu.goto(x + d / 2,y - d)
 
 
 def S(x,y,d):
@@ -292,6 +295,17 @@ def Z(x,y,d):
     tu.seth(0)
     tu.fd(d / 2)
 
+def unknown(x, y, d):
+    move(x, y)
+    tu.fd(d / 2)
+    tu.seth(270)
+    tu.fd(d)
+    tu.seth(180)
+    tu.fd(d / 2)
+    tu.seth(90)
+    tu.fd(d)
+
+
 
 def onOnePlace(letters,x,y,d,espacement=10):
     for l in letters:
@@ -345,21 +359,42 @@ def defil(letters,screensize,start=None,diameter=100,interval=None,delay=10):
         start = (screensize - screensize / 4,0)
     DefilThread(letters,screensize,*start,diameter,interval,delay).run()
 
-# var = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z]
+
+def write(text, size, start=(0,0)):
+    step = size / 2
+    posX = start[0]
+    posY = start[1]
+    for letter in text.upper():
+        if letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+            exec(f"{letter}({posX}, {posY}, {size})")
+            posX += step
+        elif letter == " ":
+            posX += step / 4
+        elif letter == "\n":
+            posY -= size + size / 4
+            posX = start[0] - step
+        posX += step
 
 
-"""var = [B,O,N,N,E,N,U,I,T]
+var = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z]
 
-start = -550
-step = 100
+#var = [B,O,N,N,E,N,U,I,T]
+
+"""start = -550
+step = 55
 for v in var:
-    v(start,10,100)
-    start += step"""
+    v(start,10,50)
+    start += step
 
+var[0](0, 0, 100)
+G(0,0,100)
+L(0, 0, 100)"""
 
 tu.speed(10)
 
-
-defil([A,S,S,S,X],400,interval=60)
+textToWrite = """Salut Je suis le roi du monde !
+et toi non nananinanere"""
+write(textToWrite, 30, (-350, 0))
+#defil([A,S,S,S,X],400,interval=60)
 tu.ht()
 tu.screen.mainloop()
