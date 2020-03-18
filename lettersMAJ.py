@@ -405,7 +405,6 @@ def write(text, size, start=(0,0)):
             posX = start[0] - step
         posX += step
 
-
 var = [A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z]
 
 #var = [B,O,N,N,E,N,U,I,T]
