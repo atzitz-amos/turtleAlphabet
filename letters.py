@@ -151,6 +151,11 @@ def e_accentaigu(x,y,d):
     move(x + d / 8,y - d / 6)
     tu.goto(x + d / 2,y)
 
+def e_accentgrave(x,y,d):
+    e(x,y,d)
+    move(x + d / 6,y - d / 8)
+    tu.goto(x + d / 2,y - d / 16)
+
 
 def G(x,y,d):
     move(x + d / 2,y)
@@ -604,7 +609,7 @@ def write(text, size, start=(0,0)):
             exec(f"{letter}({posX}, {posY}, {size})")
             posX += step
         elif letter in "!.,?'éèàêâ":
-            _char_to_func = {'!':exclamation_point,'.':point,',':comma,'?':question_mark,"'":apostrophe,'é':e_accentaigu}
+            _char_to_func = {'!':exclamation_point,'.':point,',':comma,'?':question_mark,"'":apostrophe,'é':e_accentaigu,'è':e_accentgrave}
             _char_to_func[letter](posX,posY,size)
             posX += step / 2
         elif letter == " ":
@@ -632,7 +637,7 @@ L(0, 0, 100)
 """
 
 tu.speed(3)
-textToWrite = """é"""
+textToWrite = """èé"""
 write(textToWrite,30,(-350,0))
 tu.ht()
 tu.screen.mainloop()
